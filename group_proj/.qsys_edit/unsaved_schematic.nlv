@@ -1,0 +1,41 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst unsaved.led -pg 1 -lvl 6 -y 1290
+preplace inst unsaved.cpu.clock_bridge -pg 1
+preplace inst unsaved.timer_0 -pg 1 -lvl 6 -y 1190
+preplace inst unsaved.in_L -pg 1 -lvl 6 -y 130
+preplace inst unsaved.vic_0 -pg 1 -lvl 3 -y 1070
+preplace inst unsaved.jtag_uart -pg 1 -lvl 6 -y 910
+preplace inst unsaved.cpu.cpu -pg 1
+preplace inst unsaved.vic_0.vic_priority -pg 1
+preplace inst unsaved.cpu -pg 1 -lvl 4 -y 800
+preplace inst unsaved.clk -pg 1 -lvl 1 -y 1070
+preplace inst unsaved.vic_0.vic_vector -pg 1
+preplace inst unsaved.vic_0.reset -pg 1
+preplace inst unsaved.vic_0.clk -pg 1
+preplace inst unsaved.out0 -pg 1 -lvl 6 -y 230
+preplace inst unsaved.onchip_memory -pg 1 -lvl 6 -y 1110
+preplace inst unsaved.i2c_0 -pg 1 -lvl 4 -y 950
+preplace inst unsaved.vic_0.vic_csr -pg 1
+preplace inst unsaved.out1 -pg 1 -lvl 6 -y 330
+preplace inst unsaved.timer -pg 1 -lvl 6 -y 1010
+preplace inst unsaved.in_H -pg 1 -lvl 6 -y 30
+preplace inst unsaved.cpu.reset_bridge -pg 1
+preplace inst unsaved.sample_clk -pg 1 -lvl 6 -y 430
+preplace inst unsaved -pg 1 -lvl 1 -y 40 -regy -20
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)unsaved.out0_external_connection,(SLAVE)out0.external_connection) 1 0 6 NJ 260 NJ 260 NJ 260 NJ 260 NJ 260 NJ
+preplace netloc POINT_TO_POINT<net_container>unsaved</net_container>(SLAVE)cpu.interrupt_controller_in,(MASTER)vic_0.interrupt_controller_out) 1 3 1 1270
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)unsaved.reset,(SLAVE)clk.clk_in_reset) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>unsaved</net_container>(SLAVE)out1.clk,(SLAVE)in_H.clk,(SLAVE)i2c_0.clock,(SLAVE)out0.clk,(SLAVE)timer.clk,(SLAVE)led.clk,(SLAVE)in_L.clk,(SLAVE)vic_0.clk,(SLAVE)onchip_memory.clk1,(MASTER)clk.clk,(SLAVE)cpu.clk,(SLAVE)jtag_uart.clk,(SLAVE)sample_clk.clk,(SLAVE)timer_0.clk) 1 1 5 NJ 1080 670 1170 1290 1080 NJ 1080 1810
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)unsaved.in_h_external_connection,(SLAVE)in_H.external_connection) 1 0 6 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)clk.clk_in,(SLAVE)unsaved.clk) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>unsaved</net_container>(MASTER)vic_0.irq_input,(SLAVE)timer_0.irq,(SLAVE)jtag_uart.irq,(SLAVE)timer.irq,(SLAVE)i2c_0.interrupt_sender) 1 3 3 1330 940 NJ 940 1790
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)sample_clk.external_connection,(SLAVE)unsaved.sample_clk_external_connection) 1 0 6 NJ 460 NJ 460 NJ 460 NJ 460 NJ 460 NJ
+preplace netloc INTERCONNECT<net_container>unsaved</net_container>(SLAVE)onchip_memory.s1,(MASTER)cpu.data_master,(MASTER)cpu.instruction_master,(SLAVE)i2c_0.csr,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)out1.s1,(SLAVE)in_H.s1,(SLAVE)vic_0.csr_access,(SLAVE)timer.s1,(SLAVE)cpu.debug_mem_slave,(SLAVE)timer_0.s1,(SLAVE)in_L.s1,(SLAVE)sample_clk.s1,(SLAVE)led.s1,(SLAVE)out0.s1) 1 2 4 690 1190 1310 920 1750 920 1850
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)unsaved.in_l_external_connection,(SLAVE)in_L.external_connection) 1 0 6 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)i2c_0.i2c_serial,(SLAVE)unsaved.i2c_0_i2c_serial) 1 0 4 NJ 1020 NJ 1020 NJ 1020 NJ
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)unsaved.out1_external_connection,(SLAVE)out1.external_connection) 1 0 6 NJ 360 NJ 360 NJ 360 NJ 360 NJ 360 NJ
+preplace netloc EXPORT<net_container>unsaved</net_container>(SLAVE)unsaved.led_external_connection,(SLAVE)led.external_connection) 1 0 6 NJ 1320 NJ 1320 NJ 1320 NJ 1320 NJ 1320 NJ
+preplace netloc FAN_OUT<net_container>unsaved</net_container>(SLAVE)sample_clk.reset,(SLAVE)in_H.reset,(SLAVE)i2c_0.reset_sink,(MASTER)clk.clk_reset,(SLAVE)timer.reset,(SLAVE)cpu.reset,(SLAVE)jtag_uart.reset,(SLAVE)led.reset,(SLAVE)timer_0.reset,(SLAVE)in_L.reset,(SLAVE)onchip_memory.reset1,(SLAVE)out0.reset,(SLAVE)out1.reset,(SLAVE)vic_0.reset) 1 1 5 NJ 1100 650 1210 1350 1100 NJ 1100 1830
+levelinfo -pg 1 0 200 2050
+levelinfo -hier unsaved 210 240 630 1040 1510 1770 1890 2040
