@@ -9,7 +9,7 @@
 module unsaved_vic_0 (
 		input  wire        clk_clk,                        //                      clk.clk
 		input  wire        reset_reset,                    //                    reset.reset
-		input  wire [7:0]  irq_input_irq,                  //                irq_input.irq
+		input  wire [3:0]  irq_input_irq,                  //                irq_input.irq
 		input  wire        csr_access_read,                //               csr_access.read
 		input  wire        csr_access_write,               //                         .write
 		input  wire [7:0]  csr_access_address,             //                         .address
@@ -27,14 +27,6 @@ module unsaved_vic_0 (
 	wire  [18:0] vic_csr_out2_data;       // vic_csr:out2_data -> vic_priority:in2_data
 	wire         vic_csr_out3_valid;      // vic_csr:out3_valid -> vic_priority:in3_valid
 	wire  [18:0] vic_csr_out3_data;       // vic_csr:out3_data -> vic_priority:in3_data
-	wire         vic_csr_out4_valid;      // vic_csr:out4_valid -> vic_priority:in4_valid
-	wire  [18:0] vic_csr_out4_data;       // vic_csr:out4_data -> vic_priority:in4_data
-	wire         vic_csr_out5_valid;      // vic_csr:out5_valid -> vic_priority:in5_valid
-	wire  [18:0] vic_csr_out5_data;       // vic_csr:out5_data -> vic_priority:in5_data
-	wire         vic_csr_out6_valid;      // vic_csr:out6_valid -> vic_priority:in6_valid
-	wire  [18:0] vic_csr_out6_data;       // vic_csr:out6_data -> vic_priority:in6_data
-	wire         vic_csr_out7_valid;      // vic_csr:out7_valid -> vic_priority:in7_valid
-	wire  [18:0] vic_csr_out7_data;       // vic_csr:out7_data -> vic_priority:in7_data
 	wire         vic_priority_out_valid;  // vic_priority:pri_valid -> vic_vector:in_valid
 	wire  [18:0] vic_priority_out_data;   // vic_priority:pri_data -> vic_vector:in_data
 	wire         vic_csr_control_valid;   // vic_csr:control_valid -> vic_vector:control_valid
@@ -43,7 +35,7 @@ module unsaved_vic_0 (
 	wire  [37:0] vic_vector_status_data;  // vic_vector:status_data -> vic_csr:status_data
 
 	altera_vic_csr #(
-		.NUMBER_OF_INT_PORTS (8),
+		.NUMBER_OF_INT_PORTS (4),
 		.RRS_WIDTH           (6),
 		.RIL_WIDTH           (4),
 		.DAISY_CHAIN_ENABLE  (0)
@@ -62,14 +54,6 @@ module unsaved_vic_0 (
 		.out2_data        (vic_csr_out2_data),                                 //          .data
 		.out3_valid       (vic_csr_out3_valid),                                //      out3.valid
 		.out3_data        (vic_csr_out3_data),                                 //          .data
-		.out4_valid       (vic_csr_out4_valid),                                //      out4.valid
-		.out4_data        (vic_csr_out4_data),                                 //          .data
-		.out5_valid       (vic_csr_out5_valid),                                //      out5.valid
-		.out5_data        (vic_csr_out5_data),                                 //          .data
-		.out6_valid       (vic_csr_out6_valid),                                //      out6.valid
-		.out6_data        (vic_csr_out6_data),                                 //          .data
-		.out7_valid       (vic_csr_out7_valid),                                //      out7.valid
-		.out7_data        (vic_csr_out7_data),                                 //          .data
 		.control_valid    (vic_csr_control_valid),                             //   control.valid
 		.control_data     (vic_csr_control_data),                              //          .data
 		.status_valid     (vic_vector_status_valid),                           //    status.valid
@@ -80,6 +64,14 @@ module unsaved_vic_0 (
 		.dc_in_data       (45'b000000000000000000000000000000000000000000000), // (terminated)
 		.dc_out_valid     (),                                                  // (terminated)
 		.dc_out_data      (),                                                  // (terminated)
+		.out4_valid       (),                                                  // (terminated)
+		.out4_data        (),                                                  // (terminated)
+		.out5_valid       (),                                                  // (terminated)
+		.out5_data        (),                                                  // (terminated)
+		.out6_valid       (),                                                  // (terminated)
+		.out6_data        (),                                                  // (terminated)
+		.out7_valid       (),                                                  // (terminated)
+		.out7_data        (),                                                  // (terminated)
 		.out8_valid       (),                                                  // (terminated)
 		.out8_data        (),                                                  // (terminated)
 		.out9_valid       (),                                                  // (terminated)
@@ -133,7 +125,7 @@ module unsaved_vic_0 (
 	);
 
 	altera_vic_priority #(
-		.NUMBER_OF_INT_PORTS (8),
+		.NUMBER_OF_INT_PORTS (4),
 		.PRIORITY_WIDTH      (4),
 		.PRIORITY_LATENCY    (3),
 		.DATA_WIDTH          (19)
@@ -148,16 +140,16 @@ module unsaved_vic_0 (
 		.in2_data   (vic_csr_out2_data),       //          .data
 		.in3_valid  (vic_csr_out3_valid),      //       in3.valid
 		.in3_data   (vic_csr_out3_data),       //          .data
-		.in4_valid  (vic_csr_out4_valid),      //       in4.valid
-		.in4_data   (vic_csr_out4_data),       //          .data
-		.in5_valid  (vic_csr_out5_valid),      //       in5.valid
-		.in5_data   (vic_csr_out5_data),       //          .data
-		.in6_valid  (vic_csr_out6_valid),      //       in6.valid
-		.in6_data   (vic_csr_out6_data),       //          .data
-		.in7_valid  (vic_csr_out7_valid),      //       in7.valid
-		.in7_data   (vic_csr_out7_data),       //          .data
 		.pri_valid  (vic_priority_out_valid),  //       out.valid
 		.pri_data   (vic_priority_out_data),   //          .data
+		.in4_valid  (1'b0),                    // (terminated)
+		.in4_data   (19'b0000000000000000000), // (terminated)
+		.in5_valid  (1'b0),                    // (terminated)
+		.in5_data   (19'b0000000000000000000), // (terminated)
+		.in6_valid  (1'b0),                    // (terminated)
+		.in6_data   (19'b0000000000000000000), // (terminated)
+		.in7_valid  (1'b0),                    // (terminated)
+		.in7_data   (19'b0000000000000000000), // (terminated)
 		.in8_valid  (1'b0),                    // (terminated)
 		.in8_data   (19'b0000000000000000000), // (terminated)
 		.in9_valid  (1'b0),                    // (terminated)

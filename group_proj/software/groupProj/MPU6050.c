@@ -7,7 +7,7 @@
 
 #include "MPU6050.h"
 
-
+/*
 #define WR_BUF_LEN 20
 
 ALT_AVALON_I2C_DEV_t *i2c_dev; //pointer to instance structure
@@ -56,25 +56,77 @@ ALT_AVALON_I2C_STATUS_CODE init_MPU(){
 		return 1;
 	}else{
 		printf("Device Found\n");
+	}if (check_MPU() < 0){
+		printf("Device Not Found\n");
+		return 1;
+	}else{
+		printf("Device Found\n");
 	}
+	if (check_MPU() < 0){
+			printf("Device Not Found\n");
+			return 1;
+		}else{
+			printf("Device Found\n");
+		}
+
+
 	read_reg_MPU(117, &buf, 1);
 
 	if (buf == 0x68){
 		printf("WhoAmI Passed\n");
 	}else{
-		printf("WhoAmI Failed: %d\n", buf);
+		printf("WhoAmI Failed: %x\n", buf);
+
+		return -1;
 	}
+
+
+
+
 	alt_u8 clear = 0;
 	write_byte_MPU(MPU_REG_PWRMGMT_1, &clear);//Turn off sleep mode
 	alt_u8 sleep;
 	read_byte_MPU(MPU_REG_PWRMGMT_1, &sleep);
-	printf("Sleep Status: %d\n", sleep);
+	read_byte_MPU(MPU_REG_PWRMGMT_1, &sleep);
+	printf("Sleep Status: %x\n", sleep);
 	if ((sleep & 0x20)!=0){
 		printf("It's Sleeping\n");
 	}
+
 	write_byte_MPU(28, &clear);
 	write_byte_MPU(27, &clear);
 	return 0;
+}
+*/
+
+ALT_AVALON_I2C_STATUS_CODE init_MPU(){
+	init_I2C();
+	alt_u8 buf = 0x00;
+
+	read_byte_MPU(117, &buf);
+
+	if (buf == 0x68){
+		printf("WhoAmI Passed\n");
+	}else{
+		printf("WhoAmI Failed: %x\n", buf);
+
+		return -1;
+	}
+
+	alt_u8 clear = 0;
+	write_byte_MPU(MPU_REG_PWRMGMT_1, &clear);//Turn off sleep mode
+	alt_u8 sleep;
+	read_byte_MPU(MPU_REG_PWRMGMT_1, &sleep);
+	read_byte_MPU(MPU_REG_PWRMGMT_1, &sleep);
+	printf("Sleep Status: %x\n", sleep);
+	if ((sleep & 0x20)!=0){
+		printf("It's Sleeping\n");
+	}
+
+	write_byte_MPU(28, &clear);
+	write_byte_MPU(27, &clear);
+	return 0;
+
 }
 
 alt_16 get_x_accel_MPU(){
@@ -104,6 +156,7 @@ alt_16 get_z_accel_MPU(){
 	read_byte_MPU(MPU_REG_ACCEL_Z, &msb);
 	read_byte_MPU(MPU_REG_ACCEL_Z + 1, &lsb);
 	alt_u16 ret = (msb << 8)|lsb;
+	//printf("msb, lsb = %u , %u \n", msb, lsb);
 	return *(alt_16 *) &ret;
 }
 

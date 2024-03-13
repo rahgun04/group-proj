@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'unsaved'
  * SOPC Builder design path: ../../unsaved.sopcinfo
  *
- * Generated: Wed Feb 28 12:25:07 GMT 2024
+ * Generated: Mon Mar 11 23:28:27 GMT 2024
  */
 
 /*
@@ -58,20 +58,15 @@
  * Device headers
  */
 
-#include "altera_vic_irq.h"
-#include "altera_avalon_i2c.h"
+#include "altera_nios2_gen2_irq.h"
 #include "altera_avalon_jtag_uart.h"
-#include "altera_avalon_timer.h"
 
 /*
  * Allocate the device storage
  */
 
-ALTERA_VIC_IRQ_INSTANCE ( VIC_0, vic_0);
-ALTERA_AVALON_I2C_INSTANCE ( I2C_0, i2c_0);
+ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( CPU, cpu);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART, jtag_uart);
-ALTERA_AVALON_TIMER_INSTANCE ( TIMER, timer);
-ALTERA_AVALON_TIMER_INSTANCE ( TIMER_0, timer_0);
 
 /*
  * Initialize the interrupt controller devices
@@ -83,7 +78,7 @@ ALTERA_AVALON_TIMER_INSTANCE ( TIMER_0, timer_0);
 
 void alt_irq_init ( const void* base )
 {
-    ALTERA_VIC_IRQ_INIT ( VIC_0, vic_0);
+    ALTERA_NIOS2_GEN2_IRQ_INIT ( CPU, cpu);
     alt_irq_cpu_enable_interrupts();
 }
 
@@ -94,8 +89,5 @@ void alt_irq_init ( const void* base )
 
 void alt_sys_init( void )
 {
-    ALTERA_AVALON_TIMER_INIT ( TIMER, timer);
-    ALTERA_AVALON_TIMER_INIT ( TIMER_0, timer_0);
-    ALTERA_AVALON_I2C_INIT ( I2C_0, i2c_0);
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, jtag_uart);
 }

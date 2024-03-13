@@ -24,12 +24,12 @@ module DE10_LITE_Golden_Top(
 	output		          		DRAM_WE_N,
 
 	//////////// SEG7 //////////
-	output		     [7:0]		HEX0,
-	output		     [7:0]		HEX1,
-	output		     [7:0]		HEX2,
-	output		     [7:0]		HEX3,
-	output		     [7:0]		HEX4,
-	output		     [7:0]		HEX5,
+	output		reg     [7:0]		HEX0,
+	output		 reg    [7:0]		HEX1,
+	output		reg     [7:0]		HEX2,
+	output		reg     [7:0]		HEX3,
+	output		reg     [7:0]		HEX4,
+	output		reg     [7:0]		HEX5,
 
 	//////////// KEY //////////
 	input 		     [1:0]		KEY,
@@ -59,55 +59,110 @@ module DE10_LITE_Golden_Top(
 	inout 		          		ARDUINO_RESET_N,
 
 	//////////// GPIO, GPIO connect to GPIO Default //////////
-	inout 		reg    [35:0]		GPIO
+	inout 		    [35:0]		GPIO
 );
 
 	wire [31:0] SAMPLE;
 	wire [31:0] FILT_OUT_H;
 	wire [31:0] FILT_OUT_L;
 	wire SAMPLE_CLK;
+
+	wire [31:0] atan2_a;
+	wire [31:0] atan2_b;
+	wire [31:0] atan2_q;
+	/*
 	reg i2c_scl_in;
 	reg i2c_scl_oe;
 	reg i2c_sda_in;
 	reg i2c_sda_oe;
+	*/
+
+	tri1 i2c_scl;
+	tri1 i2c_sda;
+	
+	wire i2c_rst;
+	wire i2c_en;
+	wire i2c_rw;
+	wire [7:0] i2c_mosi;
+	wire [7:0] i2c_reg_addr;
+	wire [7:0] i2c_dev_addr;
+	wire [7:0] i2c_miso;
+	wire i2c_busy; 
 
 //=======================================================
 //  REG/WIRE declarations
 //=======================================================
 
-
+/*
 always @* begin
 	i2c_sda_in = GPIO[0];
 	GPIO[0] =  i2c_sda_oe ? 1'b0 : 1'bz;
 	i2c_scl_in = GPIO[1];
 	GPIO[1] =  i2c_scl_oe ? 1'b0 : 1'bz;
 end 
+*/
 
+
+CORDIC atan2(
+	.clk(MAX10_CLK1_50),
+	.areset(1'b0),
+	.a(atan2_a),
+	.b(atan2_b),
+	.q(atan2_q)
+);
+
+
+reg [31:0] dummy;
 unsaved u0(
 	.clk_clk															(MAX10_CLK1_50),
-	.in_h_external_connection_export				(FILT_OUT_H),
 	.in_l_external_connection_export				(FILT_OUT_L),
 	.led_external_connection_export							(LEDR[9:0]),
 	.out0_external_connection_export				(SAMPLE),
 	.reset_reset_n													(1'b1),
 	.sample_clk_external_connection_export (SAMPLE_CLK),
-	.i2c_0_i2c_serial_sda_in                            (i2c_sda_in),                            //                     i2c_0_i2c_serial.sda_in
-	.i2c_0_i2c_serial_scl_in                            (i2c_scl_in),                            //                                     .scl_in
-	.i2c_0_i2c_serial_sda_oe                            (i2c_sda_oe),                            //                                     .sda_oe
-	.i2c_0_i2c_serial_scl_oe  							(i2c_scl_oe)
-	);
+	.i2c_busy_external_connection_export (i2c_busy),
+	.i2c_dev_addr_external_connection_export(i2c_dev_addr),
+	.i2c_en_external_connection_export(i2c_en),
+	.i2c_miso_external_connection_export(i2c_miso),
+	.i2c_mosi_external_connection_export(i2c_mosi),
+	.i2c_reg_addr_external_connection_export(i2c_reg_addr),
+	.i2c_rst_external_connection_export(i2c_rst),
+	.i2c_rw_external_connection_export(i2c_rw),
+	.atan2_a_external_connection_export(atan2_a),
+	.atan2_b_external_connection_export(atan2_b),
+	.atan2_q_external_connection_export(atan2_q)
 
-fir filter(
-	.sample (SAMPLE),
-	.out_h (FILT_OUT_H),
-	.out_l (FILT_OUT_L),
-	.new_sample(SAMPLE_CLK),
-	.clk(MAX10_CLK1_50)
-	);
+);
 
-	//always @* begin
-	//	GPIO = {36{SAMPLE_CLK}};
-	//end
+I2C #(.DATA_WIDTH(8),.REGISTER_WIDTH(8),.ADDRESS_WIDTH(7)) i2c_master(
+	.clock(MAX10_CLK1_50),
+	.reset_n(i2c_rst),
+	.enable(i2c_en),
+	.read_write(i2c_rw),
+	.mosi_data(i2c_mosi),
+	.register_address(i2c_reg_addr),
+	.device_address(i2c_dev_addr),
+	.divider(16'b0000000000011111),
+	//.divider(16'b0000000001111100),
+	//.divider(16'b0011000011010011),
+	.miso_data(i2c_miso),
+	.busy(i2c_busy),
+	.external_serial_data(GPIO[0]),
+	.external_serial_clock(GPIO[1])
+);
+
+
+timing Timing(
+	.clk(MAX10_CLK1_50),
+	.count(FILT_OUT_L)
+);
+always @(posedge MAX10_CLK1_50) begin
+	HEX0[0] <= i2c_busy;
+	HEX1[0] <= i2c_en;
+	HEX2[0] <= i2c_rst;
+	HEX3[0] <= i2c_rw;
+	HEX4 <= i2c_miso;
+end
 	
 //=======================================================
 //  Structural coding

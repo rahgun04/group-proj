@@ -144,7 +144,9 @@ ELF := groupProj.elf
 # Paths to C, C++, and assembly source files.
 C_SRCS += hello_world_small.c
 C_SRCS += MPU6050.c
-CXX_SRCS := Kalman.cpp
+C_SRCS += Kalman.c
+C_SRCS += i2c.c
+CXX_SRCS :=
 ASM_SRCS :=
 
 

@@ -11,7 +11,7 @@ obj/default/MPU6050.o: MPU6050.c MPU6050.h \
  ../groupProj_bsp//HAL/inc/os/alt_flag.h \
  ../groupProj_bsp//drivers/inc/altera_avalon_pio_regs.h \
  ../groupProj_bsp//HAL/inc/sys/alt_irq.h \
- ../groupProj_bsp//HAL/inc/nios2.h
+ ../groupProj_bsp//HAL/inc/nios2.h i2c.h
 
 MPU6050.h:
 
@@ -46,3 +46,5 @@ MPU6050.h:
 ../groupProj_bsp//HAL/inc/sys/alt_irq.h:
 
 ../groupProj_bsp//HAL/inc/nios2.h:
+
+i2c.h:

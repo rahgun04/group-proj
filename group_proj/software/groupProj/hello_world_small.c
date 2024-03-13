@@ -79,48 +79,76 @@
  */
 
 #include "sys/alt_stdio.h"
-#include <stdio.h>
-#include <string.h>
-#include "system.h"
-#include "altera_avalon_timer_regs.h"
-#include "altera_avalon_timer.h"
-#include "unistd.h"
-#include "altera_avalon_timer_regs.h"
-#include "altera_avalon_timer.h"
-#include "altera_avalon_pio_regs.h"
-#include "sys/alt_irq.h"
-#include "Kalman.h"
 #include "MPU6050.h"
+#include "Kalman.h"
+#include <math.h>
 
 #define PI 3.14
 
-float AccX, AccY, AccZ;
-
-int main()
-{
-
-
-	for(int i = 0; i < 200; i++){
-		printf("Start\n");
-	}
+alt_16 AccX, AccY, AccZ;
+double accX, accY, accZ;
+KalmanInstance pitchK, rollK;
 
 
-
-	KalmanInit();
-	init_MPU();
-	while(1){
-		AccZ = get_z_accel_MPU();
-		AccX = get_x_accel_MPU();
-		AccY = get_y_accel_MPU();
-		float pitch = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI) - 0.58; // AccErrorX ~(0.58) See the calculate_IMU_error()custom function for more details
-		float roll = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI) + 1.58; // AccErrorY ~(-1.58)
-		//float a = getAngle(pitch, get_x_gyro_MPU() * 131.0f);
-		printf("%d\n",  alt_timestamp());
-		//alt_u16 ret = get_x_accel_MPU();
-		//printf("%d\n", *(alt_16 *) &ret );
-		usleep(10000);
-	}
-	return 0;
+float atan2HW(float a, float b){
+	alt_u32 a_param = *(alt_u32*) &a;
+	alt_u32 b_param = *(alt_u32*) &b;
+	IOWR_ALTERA_AVALON_PIO_DATA(ATAN2_A_BASE, a_param);
+	IOWR_ALTERA_AVALON_PIO_DATA(ATAN2_B_BASE, b_param);
+	float retFloat;
+	usleep(1);
+	alt_u32 ret = IORD_ALTERA_AVALON_PIO_DATA(ATAN2_Q_BASE);
+	retFloat = *(float*) &ret;
+	return retFloat;
 }
 
 
+int main()
+{
+	alt_putstr("Hello from Nios II!\n");
+
+	/* Event loop never exits. */
+	if (init_MPU() < 0){
+		return -1;
+	}
+	KalmanInit(&pitchK);
+	KalmanInit(&rollK);
+	alt_u32 old = 0;
+	alt_u32 old_2 = 0;
+	usleep(2000000);
+	while (1){
+
+		int new = IORD_ALTERA_AVALON_PIO_DATA(IN_L_BASE);
+		int dt = new - old;
+		old = new;
+		//printf("%d\n", dt);
+		//old = new;
+		AccZ =  get_z_accel_MPU();
+		AccX =  get_x_accel_MPU();
+		AccY =  get_y_accel_MPU();
+
+		accZ = (double) AccZ;
+		accX = (double) AccX;
+		accY = (double) AccY;
+
+		//float pitch = (atan2(accX, accZ) * 180 / PI);
+		float pitch = (atan2HW(accX, accZ) * 180 / PI);
+
+		//double roll  = atan(accY / sqrt(accX * accX + accZ * accZ)) * (180/PI);
+		float roll = 0.0f;
+		old_2 = IORD_ALTERA_AVALON_PIO_DATA(IN_L_BASE);
+		float p = getAngle(&pitchK, (float) pitch, (float)get_y_gyro_MPU()  / 131.0f, (float)dt/1000000.0f);
+		int new_2 = IORD_ALTERA_AVALON_PIO_DATA(IN_L_BASE);
+		int delta = new_2 - old_2;
+		//float r = getAngle(&rollK, (float)roll, (float)get_x_gyro_MPU()  / 131.0f, (float)dt/1000000.0f);
+		float r = 0.0f;
+		printf("%d, %d, %d, %d, %d, %d, %d, %d\n",  (int) p, (int) r, AccX, AccY, AccZ, (int)pitch, (int) roll, dt);
+		//printf("%d, %d, %d\n",  (int) p, (int) r, dt);
+		/*
+		printf("%d\n", get_y_accel_MPU());
+		*/
+
+	}
+
+	return 0;
+}

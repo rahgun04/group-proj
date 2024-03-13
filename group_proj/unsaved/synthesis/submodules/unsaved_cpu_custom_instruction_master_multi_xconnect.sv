@@ -96,7 +96,7 @@ module unsaved_cpu_custom_instruction_master_multi_xconnect
     // Figure out which output is selected, and use that to
     // gate control signals
     // -------------------------------------------------------
-    assign select0 = ci_slave_n >= 248 && ci_slave_n < 256;
+    assign select0 = ci_slave_n >= 252 && ci_slave_n < 256;
 
     assign ci_master0_readra  = (select0 && ci_slave_readra);
     assign ci_master0_readrb  = (select0 && ci_slave_readrb);

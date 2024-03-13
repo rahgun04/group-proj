@@ -7,6 +7,7 @@
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library expandedCategories="Library,Project" />
- <window width="1850" height="1032" x="70" y="0" />
+ <library
+   expandedCategories="Library/DSP/Primitive DSP,Library/Processors and Peripherals,Library/Processors and Peripherals/Co-Processors/Nios II Custom Instructions,Project,Library/Processors and Peripherals/Co-Processors,Library/DSP,Library" />
+ <window width="1920" height="1032" x="0" y="0" />
 </preferences>

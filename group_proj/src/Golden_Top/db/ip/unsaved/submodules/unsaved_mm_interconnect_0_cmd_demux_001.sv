@@ -28,10 +28,10 @@
 // ------------------------------------------
 // Generation parameters:
 //   output_name:         unsaved_mm_interconnect_0_cmd_demux_001
-//   ST_DATA_W:           96
-//   ST_CHANNEL_W:        13
+//   ST_DATA_W:           98
+//   ST_CHANNEL_W:        20
 //   NUM_OUTPUTS:         2
-//   VALID_WIDTH:         13
+//   VALID_WIDTH:         1
 // ------------------------------------------
 
 //------------------------------------------
@@ -45,9 +45,9 @@ module unsaved_mm_interconnect_0_cmd_demux_001
     // -------------------
     // Sink
     // -------------------
-    input  [13-1      : 0]   sink_valid,
-    input  [96-1    : 0]   sink_data, // ST_DATA_W=96
-    input  [13-1 : 0]   sink_channel, // ST_CHANNEL_W=13
+    input  [1-1      : 0]   sink_valid,
+    input  [98-1    : 0]   sink_data, // ST_DATA_W=98
+    input  [20-1 : 0]   sink_channel, // ST_CHANNEL_W=20
     input                         sink_startofpacket,
     input                         sink_endofpacket,
     output                        sink_ready,
@@ -56,15 +56,15 @@ module unsaved_mm_interconnect_0_cmd_demux_001
     // Sources 
     // -------------------
     output reg                      src0_valid,
-    output reg [96-1    : 0] src0_data, // ST_DATA_W=96
-    output reg [13-1 : 0] src0_channel, // ST_CHANNEL_W=13
+    output reg [98-1    : 0] src0_data, // ST_DATA_W=98
+    output reg [20-1 : 0] src0_channel, // ST_CHANNEL_W=20
     output reg                      src0_startofpacket,
     output reg                      src0_endofpacket,
     input                           src0_ready,
 
     output reg                      src1_valid,
-    output reg [96-1    : 0] src1_data, // ST_DATA_W=96
-    output reg [13-1 : 0] src1_channel, // ST_CHANNEL_W=13
+    output reg [98-1    : 0] src1_data, // ST_DATA_W=98
+    output reg [20-1 : 0] src1_channel, // ST_CHANNEL_W=20
     output reg                      src1_startofpacket,
     output reg                      src1_endofpacket,
     input                           src1_ready,
@@ -92,14 +92,14 @@ module unsaved_mm_interconnect_0_cmd_demux_001
         src0_endofpacket   = sink_endofpacket;
         src0_channel       = sink_channel >> NUM_OUTPUTS;
 
-        src0_valid         = sink_channel[0] && sink_valid[0];
+        src0_valid         = sink_channel[0] && sink_valid;
 
         src1_data          = sink_data;
         src1_startofpacket = sink_startofpacket;
         src1_endofpacket   = sink_endofpacket;
         src1_channel       = sink_channel >> NUM_OUTPUTS;
 
-        src1_valid         = sink_channel[1] && sink_valid[1];
+        src1_valid         = sink_channel[1] && sink_valid;
 
     end
 
@@ -109,7 +109,7 @@ module unsaved_mm_interconnect_0_cmd_demux_001
     assign ready_vector[0] = src0_ready;
     assign ready_vector[1] = src1_ready;
 
-    assign sink_ready = |(sink_channel & {{11{1'b0}},{ready_vector[NUM_OUTPUTS - 1 : 0]}});
+    assign sink_ready = |(sink_channel & {{18{1'b0}},{ready_vector[NUM_OUTPUTS - 1 : 0]}});
 
 endmodule
 
