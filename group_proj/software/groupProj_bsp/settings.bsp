@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>13-Mar-2024 00:33:27</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1710290008028</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>14-Mar-2024 09:45:21</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1710409521571</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>D:\Uni\Year-2\InfoProc\Group_Proj\group_proj\software\groupProj_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\unsaved.sopcinfo</SopcDesignFile>
@@ -899,116 +899,164 @@
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
         <MemoryMap>
+                <slaveDescriptor>hex_3</slaveDescriptor>
+                <addressRange>0x00000000 - 0x0000000F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>onchip_memory</slaveDescriptor>
                 <addressRange>0x00010000 - 0x0001FFFF</addressRange>
                 <addressSpan>65536</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>atan2_q</slaveDescriptor>
+                <slaveDescriptor>sw</slaveDescriptor>
                 <addressRange>0x00021000 - 0x0002100F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>atan2_b</slaveDescriptor>
+                <slaveDescriptor>hex_5</slaveDescriptor>
                 <addressRange>0x00021010 - 0x0002101F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>atan2_a</slaveDescriptor>
+                <slaveDescriptor>hex_4</slaveDescriptor>
                 <addressRange>0x00021020 - 0x0002102F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_busy</slaveDescriptor>
+                <slaveDescriptor>hex_2</slaveDescriptor>
                 <addressRange>0x00021030 - 0x0002103F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_miso</slaveDescriptor>
+                <slaveDescriptor>hex_1</slaveDescriptor>
                 <addressRange>0x00021040 - 0x0002104F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_dev_addr</slaveDescriptor>
+                <slaveDescriptor>hex_0</slaveDescriptor>
                 <addressRange>0x00021050 - 0x0002105F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_reg_addr</slaveDescriptor>
+                <slaveDescriptor>btn</slaveDescriptor>
                 <addressRange>0x00021060 - 0x0002106F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_mosi</slaveDescriptor>
+                <slaveDescriptor>atan2_q</slaveDescriptor>
                 <addressRange>0x00021070 - 0x0002107F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_rw</slaveDescriptor>
+                <slaveDescriptor>atan2_b</slaveDescriptor>
                 <addressRange>0x00021080 - 0x0002108F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_en</slaveDescriptor>
+                <slaveDescriptor>atan2_a</slaveDescriptor>
                 <addressRange>0x00021090 - 0x0002109F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>i2c_rst</slaveDescriptor>
+                <slaveDescriptor>i2c_busy</slaveDescriptor>
                 <addressRange>0x000210A0 - 0x000210AF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>sample_clk</slaveDescriptor>
+                <slaveDescriptor>i2c_miso</slaveDescriptor>
                 <addressRange>0x000210B0 - 0x000210BF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>in_L</slaveDescriptor>
+                <slaveDescriptor>i2c_dev_addr</slaveDescriptor>
                 <addressRange>0x000210C0 - 0x000210CF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>in_H</slaveDescriptor>
+                <slaveDescriptor>i2c_reg_addr</slaveDescriptor>
                 <addressRange>0x000210D0 - 0x000210DF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>out1</slaveDescriptor>
+                <slaveDescriptor>i2c_mosi</slaveDescriptor>
                 <addressRange>0x000210E0 - 0x000210EF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>out0</slaveDescriptor>
+                <slaveDescriptor>i2c_rw</slaveDescriptor>
                 <addressRange>0x000210F0 - 0x000210FF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>led</slaveDescriptor>
+                <slaveDescriptor>i2c_en</slaveDescriptor>
                 <addressRange>0x00021100 - 0x0002110F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>i2c_rst</slaveDescriptor>
+                <addressRange>0x00021110 - 0x0002111F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>sample_clk</slaveDescriptor>
+                <addressRange>0x00021120 - 0x0002112F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>in_L</slaveDescriptor>
+                <addressRange>0x00021130 - 0x0002113F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>in_H</slaveDescriptor>
+                <addressRange>0x00021140 - 0x0002114F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>out1</slaveDescriptor>
+                <addressRange>0x00021150 - 0x0002115F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>out0</slaveDescriptor>
+                <addressRange>0x00021160 - 0x0002116F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>led</slaveDescriptor>
+                <addressRange>0x00021170 - 0x0002117F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00021110 - 0x00021117</addressRange>
+                <addressRange>0x00021180 - 0x00021187</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

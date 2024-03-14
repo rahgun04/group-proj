@@ -130,7 +130,14 @@ unsaved u0(
 	.i2c_rw_external_connection_export(i2c_rw),
 	.atan2_a_external_connection_export(atan2_a),
 	.atan2_b_external_connection_export(atan2_b),
-	.atan2_q_external_connection_export(atan2_q)
+	.atan2_q_external_connection_export(atan2_q),
+	.btn_external_connection_export(KEY),
+	.hex_0_external_connection_export(HEX0),
+	.hex_1_external_connection_export(HEX1),
+	.hex_2_external_connection_export(HEX3),
+	.hex_3_external_connection_export(HEX4),
+	.hex_4_external_connection_export(HEX5),
+	.hex_5_external_connection_export(HEX6)
 
 );
 
@@ -156,13 +163,7 @@ timing Timing(
 	.clk(MAX10_CLK1_50),
 	.count(FILT_OUT_L)
 );
-always @(posedge MAX10_CLK1_50) begin
-	HEX0[0] <= i2c_busy;
-	HEX1[0] <= i2c_en;
-	HEX2[0] <= i2c_rst;
-	HEX3[0] <= i2c_rw;
-	HEX4 <= i2c_miso;
-end
+
 	
 //=======================================================
 //  Structural coding

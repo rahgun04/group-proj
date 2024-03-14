@@ -103,6 +103,11 @@ float atan2HW(float a, float b){
 }
 
 
+void uart_in(){
+
+}
+
+
 int main()
 {
 	alt_putstr("Hello from Nios II!\n");
@@ -132,18 +137,22 @@ int main()
 		accY = (double) AccY;
 
 		//float pitch = (atan2(accX, accZ) * 180 / PI);
-		float pitch = (atan2HW(accX, accZ) * 180 / PI);
+		float pitch = (atan2HW(-accX, accZ) * 180 / PI);
 
 		//double roll  = atan(accY / sqrt(accX * accX + accZ * accZ)) * (180/PI);
 		float roll = 0.0f;
 		old_2 = IORD_ALTERA_AVALON_PIO_DATA(IN_L_BASE);
-		float p = getAngle(&pitchK, (float) pitch, (float)get_y_gyro_MPU()  / 131.0f, (float)dt/1000000.0f);
+		float p = getAngle(&pitchK, (float) pitch, (float)(-get_y_gyro_MPU())  / 131.0f, (float)dt/1000000.0f);
 		int new_2 = IORD_ALTERA_AVALON_PIO_DATA(IN_L_BASE);
 		int delta = new_2 - old_2;
-		//float r = getAngle(&rollK, (float)roll, (float)get_x_gyro_MPU()  / 131.0f, (float)dt/1000000.0f);
-		float r = 0.0f;
-		printf("%d, %d, %d, %d, %d, %d, %d, %d\n",  (int) p, (int) r, AccX, AccY, AccZ, (int)pitch, (int) roll, dt);
-		//printf("%d, %d, %d\n",  (int) p, (int) r, dt);
+
+		//Poll Button
+		int btn = IORD_ALTERA_AVALON_PIO_DATA(BTN_BASE);
+		int shoot = btn & 0x01;
+		int go = btn & 0x02;
+
+		printf("%d, %d, %d, %d, %d, %d, %d, %d, %d\n",  (int) p, shoot, go,AccX, AccY, AccZ, (int)pitch, (int) roll, dt);
+		//printf("%d, %d, %d, %d\n",  (int) p,shoot, go, dt);
 		/*
 		printf("%d\n", get_y_accel_MPU());
 		*/
