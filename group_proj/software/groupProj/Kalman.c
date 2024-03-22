@@ -22,9 +22,9 @@
 
 void KalmanInit(KalmanInstance *inst) {
     /* We will set the variables like so, these can also be tuned by the user */
-	inst->Q_angle = 0.0001f;
+	inst->Q_angle = 0.001f;
 	inst->Q_bias = 0.003f;
-	inst->R_measure = 0.1f;
+	inst->R_measure = 0.03f;
 
 	inst->angle = 0.0f; // Reset the angle
 	inst->bias = 0.0f; // Reset bias

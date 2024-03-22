@@ -1,5 +1,5 @@
 Flow report for DE10_LITE_Golden_Top
-Thu Mar 14 10:07:50 2024
+Fri Mar 22 15:22:09 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Thu Mar 14 10:07:45 2024       ;
+; Flow Status                        ; Successful - Fri Mar 22 15:22:03 2024       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; DE10_LITE_Golden_Top                        ;
 ; Top-level Entity Name              ; DE10_LITE_Golden_Top                        ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+----------------------+
 ; Option            ; Setting              ;
 +-------------------+----------------------+
-; Start date & time ; 03/14/2024 10:05:30  ;
+; Start date & time ; 03/22/2024 15:18:13  ;
 ; Main task         ; Compilation          ;
 ; Revision Name     ; DE10_LITE_Golden_Top ;
 +-------------------+----------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 105658698741511.171041073028132        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 105658698741511.171112069311580        ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --         ;
@@ -97,11 +97,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:43     ; 1.0                     ; 5100 MB             ; 00:00:47                           ;
-; Fitter               ; 00:00:22     ; 1.9                     ; 6328 MB             ; 00:00:30                           ;
-; Assembler            ; 00:00:04     ; 1.0                     ; 4716 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:04     ; 3.3                     ; 4992 MB             ; 00:00:11                           ;
-; Total                ; 00:02:13     ; --                      ; --                  ; 00:01:30                           ;
+; Analysis & Synthesis ; 00:02:06     ; 1.0                     ; 5106 MB             ; 00:01:04                           ;
+; Fitter               ; 00:00:25     ; 1.9                     ; 6331 MB             ; 00:00:33                           ;
+; Assembler            ; 00:00:04     ; 1.0                     ; 4716 MB             ; 00:00:03                           ;
+; Timing Analyzer      ; 00:00:05     ; 3.3                     ; 4991 MB             ; 00:00:12                           ;
+; Total                ; 00:02:40     ; --                      ; --                  ; 00:01:52                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

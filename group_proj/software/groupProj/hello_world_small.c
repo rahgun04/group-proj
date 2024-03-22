@@ -86,7 +86,7 @@
 #define PI 3.14
 
 alt_16 AccX, AccY, AccZ;
-double accX, accY, accZ;
+float accX, accY, accZ;
 KalmanInstance pitchK, rollK;
 
 
@@ -132,17 +132,17 @@ int main()
 		AccX =  get_x_accel_MPU();
 		AccY =  get_y_accel_MPU();
 
-		accZ = (double) AccZ;
-		accX = (double) AccX;
-		accY = (double) AccY;
+		accZ = (float) AccZ;
+		accX = (float) AccX;
+		accY = (float) AccY;
 
 		//float pitch = (atan2(accX, accZ) * 180 / PI);
-		float pitch = (atan2HW(-accX, accZ) * 180 / PI);
+		float pitch = (atan2HW(accX, accZ) * 180 / PI);
 
 		//double roll  = atan(accY / sqrt(accX * accX + accZ * accZ)) * (180/PI);
 		float roll = 0.0f;
 		old_2 = IORD_ALTERA_AVALON_PIO_DATA(IN_L_BASE);
-		float p = getAngle(&pitchK, (float) pitch, (float)(-get_y_gyro_MPU())  / 131.0f, (float)dt/1000000.0f);
+		float p = getAngle(&pitchK, (float) pitch, (float)(get_y_gyro_MPU())  / 131.0f, (float)dt/1000000.0f);
 		int new_2 = IORD_ALTERA_AVALON_PIO_DATA(IN_L_BASE);
 		int delta = new_2 - old_2;
 
@@ -156,7 +156,6 @@ int main()
 		/*
 		printf("%d\n", get_y_accel_MPU());
 		*/
-
 	}
 
 	return 0;

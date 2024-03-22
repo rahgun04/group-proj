@@ -61,7 +61,7 @@
    {
       datum _sortIndex
       {
-         value = "22";
+         value = "21";
          type = "int";
       }
    }
@@ -101,7 +101,7 @@
    {
       datum _sortIndex
       {
-         value = "23";
+         value = "22";
          type = "int";
       }
    }
@@ -117,7 +117,7 @@
    {
       datum _sortIndex
       {
-         value = "24";
+         value = "23";
          type = "int";
       }
    }
@@ -133,7 +133,7 @@
    {
       datum _sortIndex
       {
-         value = "25";
+         value = "24";
          type = "int";
       }
    }
@@ -149,7 +149,7 @@
    {
       datum _sortIndex
       {
-         value = "26";
+         value = "25";
          type = "int";
       }
    }
@@ -157,7 +157,7 @@
    {
       datum _sortIndex
       {
-         value = "27";
+         value = "26";
          type = "int";
       }
    }
@@ -173,7 +173,7 @@
    {
       datum _sortIndex
       {
-         value = "28";
+         value = "27";
          type = "int";
       }
    }
@@ -385,14 +385,6 @@
          type = "String";
       }
    }
-   element nios_custom_instr_floating_point_0
-   {
-      datum _sortIndex
-      {
-         value = "21";
-         type = "int";
-      }
-   }
    element onchip_memory
    {
       datum _sortIndex
@@ -466,7 +458,7 @@
    {
       datum _sortIndex
       {
-         value = "29";
+         value = "28";
          type = "int";
       }
    }
@@ -1127,13 +1119,6 @@
   <parameter name="width" value="10" />
  </module>
  <module
-   name="nios_custom_instr_floating_point_0"
-   kind="altera_nios_custom_instr_floating_point"
-   version="18.1"
-   enabled="0">
-  <parameter name="useDivider" value="1" />
- </module>
- <module
    name="onchip_memory"
    kind="altera_avalon_onchip_memory2"
    version="18.1"
@@ -1445,15 +1430,6 @@
  <connection kind="clock" version="18.1" start="clk.clk" end="onchip_memory.clk1" />
  <connection kind="interrupt" version="18.1" start="cpu.irq" end="jtag_uart.irq">
   <parameter name="irqNumber" value="0" />
- </connection>
- <connection
-   kind="nios_custom_instruction"
-   version="18.1"
-   start="cpu.custom_instruction_master"
-   end="nios_custom_instr_floating_point_0.s1">
-  <parameter name="CIName">nios_custom_instr_floating_point_0</parameter>
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="252" />
  </connection>
  <connection kind="reset" version="18.1" start="clk.clk_reset" end="cpu.reset" />
  <connection
